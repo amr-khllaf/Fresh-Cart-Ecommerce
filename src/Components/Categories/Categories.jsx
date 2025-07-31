@@ -48,7 +48,7 @@ function Categories() {
   }
   return (
     <>
-      <div className="container mx-auto px-2 sm:px-4 py-8">
+      <div className="container mx-auto px-4 py-8">
         <h2
           className="text-2xl sm:text-3xl font-bold mb-2"
           data-aos="fade-down"

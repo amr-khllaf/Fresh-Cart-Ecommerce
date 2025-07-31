@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import LazyLoading from "../LazyLoading/LazyLoading";
+import useAOS from "../../CustomHooks/useAOS/useAOS";
 
 function ProductDetails() {
   const { id } = useParams(); // Get the product ID from the URL parameters
@@ -17,6 +18,9 @@ function ProductDetails() {
     queryKey: ["productDetails", id],
     queryFn: getProductDetails,
   });
+
+  // ----------- Use AOS custom Hook -----------
+  useAOS([data]);
 
   // Set initial imageCover when product data is available
   useEffect(() => {
@@ -46,8 +50,12 @@ function ProductDetails() {
     <div className="container mx-auto px-4 py-12 min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl p-8 md:p-12 transition-all duration-300 hover:shadow-2xl border border-gray-100">
         {/* Image Section */}
-        <div className="flex flex-col items-center space-y-8">
-          <div className="relative group w-96">
+        <div className="flex flex-col items-center order-2 lg:order-1 space-y-8">
+          <div
+            className="relative group w-96"
+            data-aos="fade-right"
+            data-aos-delay="200"
+          >
             <img
               src={imageCover || product.imageCover}
               alt={product.title}
@@ -64,6 +72,9 @@ function ProductDetails() {
                   src={img}
                   alt={`Product thumbnail ${idx + 1}`}
                   onClick={() => setImageCover(img)}
+                  loading="lazy"
+                  data-aos="fade-up"
+                  data-aos-delay={`${(idx + 1) * 100}`} // Delay each thumbnail for time (idx + 1) * 100ms = {(idx + 1) * 100}ms = 100ms, 200ms, 300ms, etc.
                   className="w-20 h-20 object-cover rounded-lg border border-gray-200 shadow-sm hover:scale-110 hover:border-emerald-400 transition-all duration-300 cursor-pointer"
                 />
               ))}
@@ -72,9 +83,13 @@ function ProductDetails() {
         </div>
 
         {/* Details Section */}
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full order-1 lg:order-2">
           {/* Top section: title + category + description */}
-          <div className="flex-grow space-y-4">
+          <div
+            className="flex-grow space-y-4"
+            data-aos="fade-left"
+            data-aos-delay="200"
+          >
             <h1 className="text-3xl font-bold text-gray-900/90 tracking-tight">
               {product.title}
             </h1>
@@ -87,10 +102,18 @@ function ProductDetails() {
           </div>
 
           {/* Optional separator line */}
-          <div className="border-t border-gray-200 my-4" />
+          <div
+            className="border-t border-gray-200 my-4"
+            data-aos="fade-up"
+            data-aos-anchor-placement="center-bottom"
+          />
 
           {/* Bottom section: price + rating + add to cart button */}
-          <div className="space-y-4 pt-2">
+          <div
+            className="space-y-4 pt-2"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             <div className="flex items-center justify-between">
               <span className="text-lg font-semibold text-gray-600/70">
                 EGP {product.price.toLocaleString()}

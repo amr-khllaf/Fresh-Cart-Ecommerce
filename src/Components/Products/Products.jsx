@@ -57,10 +57,10 @@ function Products() {
     // retryDelay: 1500, // Delay between retries in milliseconds
     // cacheTime: 300000, // Cache data for 5 minutes (300,000 milliseconds)
   });
-  console.log("Data:", data);
-  console.log("Is Loading:", isLoading);
-  console.log("Error:", error);
-  console.log("Is Fetching:", isFetching);
+  // console.log("Data:", data);
+  // console.log("Is Loading:", isLoading);
+  // console.log("Error:", error);
+  // console.log("Is Fetching:", isFetching);
 
   // // Initialize AOS when component mounts
   // useEffect(() => {
@@ -95,20 +95,32 @@ function Products() {
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row gap-4 my-4 items-center justify-between bg-gray-100 p-5 pb-7 rounded-md shadow-md mb-5 ">
           {/* Slider Section */}
-          <div className="w-full md:w-[75%] sm:mb-3 md:mb-0">
+          <div
+            className="w-full md:w-[75%] sm:mb-3 md:mb-0 "
+            data-aos="fade-right"
+            data-aos-delay="300"
+          >
             <HomeSlider />
           </div>
 
           {/* Side Images Section */}
-          <div className="w-full md:w-[25%] flex md:flex-col gap-8   ">
-            <div className="h-40 md:h-1/2 w-full overflow-hidden rounded-md">
+          <div className="w-full md:w-[25%] flex md:flex-col gap-8  py-3 md:py-0 rounded-md shadow-md">
+            <div
+              className="h-40 md:h-1/2 w-full overflow-hidden rounded-md"
+              data-aos="fade-down"
+              data-aos-delay="200"
+            >
               <img
                 src={img1}
                 alt="Blog 1"
                 className="w-full h-full object-cover rounded-md hover:scale-105 transition-transform duration-300"
               />
             </div>
-            <div className="h-40 md:h-1/2 w-full overflow-hidden rounded-md">
+            <div
+              className="h-40 md:h-1/2 w-full overflow-hidden rounded-md"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <img
                 src={img2}
                 alt="Blog 2"

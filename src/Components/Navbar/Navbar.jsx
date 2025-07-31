@@ -65,26 +65,6 @@ function Navbar() {
 
         {/* Right Nav */}
         <div className="right-nav flex items-center gap-4">
-          <ul className="flex items-center gap-2.5">
-            <li>
-              <i className="fa-brands fa-facebook cursor-pointer hover:text-blue-600 transition  duration-400"></i>
-            </li>
-            <li>
-              <i className="fa-brands fa-twitter cursor-pointer hover:text-blue-400 transition  duration-400"></i>
-            </li>
-            <li>
-              <i className="fa-brands fa-instagram cursor-pointer hover:text-pink-500 transition  duration-400"></i>
-            </li>
-            <li>
-              <i className="fa-brands fa-tiktok cursor-pointer hover:text-zinc-700/75 transition  duration-400"></i>
-            </li>
-            <li>
-              <i className="fa-brands fa-linkedin cursor-pointer hover:text-blue-700 transition  duration-400"></i>
-            </li>
-            <li>
-              <i className="fa-brands fa-youtube cursor-pointer hover:text-red-600 transition  duration-400"></i>
-            </li>
-          </ul>
           {/* Conditional rendering based on authentication */}
 
           <ul className="flex items-center gap-2.5 ">
