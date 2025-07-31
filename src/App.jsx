@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+// import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom"; // To support GitHub Pages
+
 import Layout from "./Components/Layout/Layout";
 import Register from "./Components/Register/Register";
 import Login from "./Components/Login/Login";
@@ -16,7 +18,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 
 function App() {
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     {
       path: "",
       element: <Layout />,
