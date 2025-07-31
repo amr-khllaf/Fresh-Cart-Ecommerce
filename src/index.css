@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+/* ---- Active Link Styles ---- */
+.active {
+  border-bottom: 2px solid #1eb31e; /* Change to your desired color */
+  padding-bottom: 1px;
+}
