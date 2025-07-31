@@ -74,6 +74,7 @@ function Categories() {
               <img
                 src={category.image}
                 alt={category.name}
+                loading="lazy"
                 className="w-full h-80 sm:h-48 md:h-52 lg:h-60 object-fill md:object-cover mb-3 sm:mb-4 transition-transform duration-300 hover:scale-105"
               />
               <h3 className="text-base sm:text-lg font-semibold text-center text-gray-400">

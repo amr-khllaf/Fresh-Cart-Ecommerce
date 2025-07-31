@@ -92,6 +92,7 @@ export default function CategorySlider() {
               <img
                 src={category.image}
                 alt={category.name}
+                loading="lazy"
                 className="w-full h-60 object-fill rounded-md hover:scale-105 transition-transform duration-300"
               />
               <h3 className="text-center text-lg font-semibold mt-2 text-gray-800">

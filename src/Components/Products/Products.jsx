@@ -142,6 +142,7 @@ function Products() {
               <img
                 src={product.imageCover}
                 alt={product.title}
+                loading="lazy"
                 className="w-full object-cover rounded-md mb-4 hover:scale-105 transition-transform duration-300"
               />
               <h6 className="text-sm text-gray-500 mb-1">
