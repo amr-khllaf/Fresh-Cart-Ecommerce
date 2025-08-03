@@ -14,12 +14,9 @@ function Navbar() {
   }
   return (
     <nav className="navbar bg-gray-100 shadow-md mb-8 ">
-      <div className="container flex justify-between items-center p-4   mx-auto">
+      <div className="container flex justify-between items-center p-4 mx-auto w-[90%] ">
         {/* Left Nav */}
-        <div
-          className="
-      left-nav flex items-center gap-4 "
-        >
+        <div className="left-nav flex items-center gap-4 ">
           <Link to="/products">
             <img src={freshlogo} alt="FreshCart Cart" />
           </Link>

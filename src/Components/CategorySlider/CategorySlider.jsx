@@ -95,6 +95,8 @@ export default function CategorySlider() {
                   src={category.image}
                   alt={category.name}
                   loading="lazy"
+                  data-aos="fade-left"
+                  data-aos-delay="200"
                   className="w-full h-full object-contain sm:object-cover md:object-cover  transform transition-transform duration-500 hover:scale-105"
                 />
               </div>
@@ -103,7 +105,7 @@ export default function CategorySlider() {
               <h3
                 className="text-center text-lg font-semibold mt-2 text-gray-800"
                 data-aos="fade-up"
-                data-aos-delay="400"
+                data-aos-delay="300"
               >
                 {category.name}
               </h3>

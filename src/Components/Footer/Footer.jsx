@@ -8,8 +8,8 @@ import Amazon from "../../assets/images/Amazon.png";
 
 function Footer() {
   return (
-    <footer className="bg-gray-100 shadow-md mt-8">
-      <div className="container mx-auto py-4">
+    <footer className="bg-gray-100 shadow-md mt-8 ">
+      <div className="container mx-auto p-6">
         {/* Top Section: App Download */}
         <div className="top-footer text-center">
           <h2 className="text-xl font-bold">Get The Fresh Cart App</h2>
