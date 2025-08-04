@@ -16,6 +16,7 @@ import Products from "./Components/Products/Products";
 import { QueryClient } from "./../node_modules/@tanstack/query-core/src/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
+import CartContextProvider from "./Context/CartContext";
 
 function App() {
   const router = createHashRouter([
@@ -92,9 +93,12 @@ function App() {
 
   return (
     <>
+      {/* Provide the AuthContext to the entire app */}
       <AuthContext>
         <QueryClientProvider client={reactQueryClientConfig}>
-          <RouterProvider router={router} />
+          <CartContextProvider>
+            <RouterProvider router={router} />
+          </CartContextProvider>
         </QueryClientProvider>
       </AuthContext>
     </>

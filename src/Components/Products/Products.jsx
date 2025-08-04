@@ -10,6 +10,7 @@ import CategorySlider from "../CategorySlider/CategorySlider";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import useAOS from "../../CustomHooks/useAOS/useAOS";
 import { Link } from "react-router-dom";
+import { div } from "framer-motion/client";
 
 function Products() {
   // This component will render the products
@@ -133,7 +134,7 @@ function Products() {
         <CategorySlider />
 
         {/* Products Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 p-4 ">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 p-4 ">
           <h2
             className="text-2xl font-bold mt-8 col-span-full"
             data-aos="fade-right"
@@ -144,59 +145,70 @@ function Products() {
           {/* Products will be rendered here */}
 
           {allProducts.map((product, index) => (
-            <Link
+            <div
               key={product._id}
-              to={`/productDetails/${product._id}`}
+              className="product bg-white rounded-lg shadow-md p-4 flex flex-col items-center hover:shadow-lg transition-shadow duration-300"
               data-aos="fade-up"
               data-aos-delay={(index % 6) * 100}
-              className="product bg-white rounded-lg shadow-md p-4 flex flex-col items-center hover:shadow-lg transition-shadow duration-300"
             >
-              <img
-                src={product.imageCover}
-                alt={product.title}
-                loading="lazy"
-                className="w-full object-cover rounded-md mb-4 hover:scale-105 transition-transform duration-300"
-              />
-              <h6 className="text-sm text-gray-500 mb-1">
-                {product.category.name}
-              </h6>
-              <h2 className="text-lg font-semibold mb-2">
-                {product.title.split(" ").slice(0, 2).join(" ")}
-              </h2>
-              <div className="flex flex-col w-full">
-                <div className="flex items-center justify-between">
-                  <span
-                    className={`${
-                      product.priceAfterDiscount
-                        ? "line-through text-red-500 text-sm"
-                        : "text-green-600 "
-                    }`}
-                  >
-                    {product.price} <span className="text-sm">EGP</span>
-                  </span>
-                  {!product.priceAfterDiscount && (
-                    <p className="flex items-center text-yellow-500 ml-2">
-                      <i className="fa-solid fa-star mr-1"></i>
-                      {product.ratingsAverage}
-                    </p>
-                  )}
-                </div>
-                {product.priceAfterDiscount && (
-                  <div className="flex items-center justify-between mt-1">
-                    <div className="text-green-600 flex justify-between w-full">
-                      <div className="flex items-center">
-                        {product.priceAfterDiscount}
-                        <span className="text-sm ml-1">EGP</span>
-                      </div>
-                      <div className="flex items-center text-yellow-500">
+              <Link
+                to={`/productDetails/${product._id}`}
+                className="w-full flex flex-col items-center"
+                tabIndex={-1}
+                style={{ textDecoration: "none" }}
+              >
+                <img
+                  src={product.imageCover}
+                  alt={product.title}
+                  loading="lazy"
+                  className="w-full object-cover rounded-md mb-4 hover:scale-105 transition-transform duration-300"
+                />
+                <h6 className="text-sm text-gray-500 mb-1">
+                  {product.category.name}
+                </h6>
+                <h2 className="text-lg font-semibold mb-2">
+                  {product.title.split(" ").slice(0, 2).join(" ")}
+                </h2>
+                <div className="flex flex-col w-full">
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={`${
+                        product.priceAfterDiscount
+                          ? "line-through text-red-500 text-sm"
+                          : "text-green-600 "
+                      }`}
+                    >
+                      {product.price} <span className="text-sm">EGP</span>
+                    </span>
+                    {!product.priceAfterDiscount && (
+                      <p className="flex items-center text-yellow-500 ml-2">
                         <i className="fa-solid fa-star mr-1"></i>
                         {product.ratingsAverage}
+                      </p>
+                    )}
+                  </div>
+                  {product.priceAfterDiscount && (
+                    <div className="flex items-center justify-between mt-1">
+                      <div className="text-green-600 flex justify-between w-full">
+                        <div className="flex items-center">
+                          {product.priceAfterDiscount}
+                          <span className="text-sm ml-1">EGP</span>
+                        </div>
+                        <div className="flex items-center text-yellow-500">
+                          <i className="fa-solid fa-star mr-1"></i>
+                          {product.ratingsAverage}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            </Link>
+                  )}
+                </div>
+              </Link>
+              {/*   Spacer to push the button to the bottom */}
+              <div className="flex-1 w-full "></div>
+              <button className=" bg-green-800 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors duration-300 cursor-pointer mt-4 w-full text-sm font-semibold">
+                + Add To Cart
+              </button>
+            </div>
           ))}
         </div>
       </div>
