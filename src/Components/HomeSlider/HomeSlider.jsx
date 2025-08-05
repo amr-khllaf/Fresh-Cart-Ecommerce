@@ -33,6 +33,7 @@ export default function HomeSlider() {
             src={image}
             alt={`slide-${index + 1}`}
             className="w-full h-full object-cover rounded-md hover:scale-105 transition-transform duration-300"
+            loading="lazy"
           />
         </div>
       ))}
