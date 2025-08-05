@@ -15,7 +15,7 @@ function Navbar() {
     navigate("/login"); // Redirect to login page
   }
   return (
-    <nav className="navbar bg-white shadow-md mb-8">
+    <nav className="navbar bg-white shadow-md mb-8 fixed top-0 left-0 right-0 z-50">
       <div className="container flex justify-between items-center px-4 py-3 mx-auto w-full ">
         {/* Left Nav */}
         <div className="left-nav flex items-center gap-4">
