@@ -28,7 +28,7 @@ export default function HomeSlider() {
         sliderimage5,
         sliderimage6,
       ].map((image, index) => (
-        <div key={index} className="h-80 w-full overflow-hidden">
+        <div key={index} className="h-100 w-full overflow-hidden">
           <img
             src={image}
             alt={`slide-${index + 1}`}

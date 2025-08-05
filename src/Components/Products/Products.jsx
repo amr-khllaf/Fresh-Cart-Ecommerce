@@ -114,15 +114,45 @@ function Products() {
   return (
     <>
       <div className="container mx-auto">
-        <div className="flex flex-col md:flex-row gap-4 my-4 items-center justify-between bg-gray-100 p-5 pb-7 rounded-md shadow-md mb-5 ">
+        <div
+          className="flex flex-col md:flex-row gap-4 my-4 items-center justify-between bg-gray-100 p-5 pb-7 rounded-md shadow-md mb-5 "
+          data-aos="fade-bottom"
+          data-aos-delay="200"
+        >
           {/* Slider Section */}
           <div
-            className="w-full  sm:mb-3 md:mb-0 "
+            className="w-full sm:mb-3 md:mb-0 "
             data-aos="fade-right"
             data-aos-delay="300"
           >
             <HomeSlider />
           </div>
+
+          {/* Side Images Section */}
+          {/* <div className="w-full md:w-[25%] flex md:flex-col gap-8  py-3 md:py-0 rounded-md shadow-md">
+            <div
+              className="h-40 md:h-1/2 w-full overflow-hidden rounded-md"
+              data-aos="fade-down"
+              data-aos-delay="200"
+            >
+              <img
+                src={img1}
+                alt="Blog 1"
+                className="w-full h-full object-cover rounded-md hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div
+              className="h-40 md:h-1/2 w-full overflow-hidden rounded-md"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <img
+                src={img2}
+                alt="Blog 2"
+                className="w-full h-full object-cover rounded-md hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          </div> */}
         </div>
         {/* Category Slider */}
         <CategorySlider />
