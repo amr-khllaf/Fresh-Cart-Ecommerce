@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import HomeSlider from "../HomeSlider/HomeSlider";
 import img1 from "../../assets/images/blog-img-1.jpeg";
 import img2 from "../../assets/images/blog-img-2.jpeg";
@@ -11,8 +11,28 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import useAOS from "../../CustomHooks/useAOS/useAOS";
 import { Link } from "react-router-dom";
 import { div } from "framer-motion/client";
+import { CartContext } from "../../Context/CartContext";
+import toast from "react-hot-toast";
 
 function Products() {
+  const { addProductToCart } = useContext(CartContext);
+
+  async function handleAddProduct(id) {
+    const responseFlag = await addProductToCart(id); // we will make it await to handle the async because the if condition will be applied after it so we need to handle it
+    if (responseFlag) {
+      // Message Success
+      toast.success("Product added to cart successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    } else {
+      // Problem With Response
+      toast.error("Failed to add product to cart. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    }
+  }
   // This component will render the products
   // You can fetch products from an API or use static data
   // const [allProducts, setAllProducts] = useState(null);
@@ -205,7 +225,10 @@ function Products() {
               </Link>
               {/*   Spacer to push the button to the bottom */}
               <div className="flex-1 w-full "></div>
-              <button className=" bg-green-800 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors duration-300 cursor-pointer mt-4 w-full text-sm font-semibold">
+              <button
+                className=" bg-green-800 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors duration-300 cursor-pointer mt-4 w-full text-sm font-semibold"
+                onClick={() => handleAddProduct(product._id)}
+              >
                 + Add To Cart
               </button>
             </div>

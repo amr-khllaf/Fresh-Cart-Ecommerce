@@ -2,8 +2,10 @@ import { useContext } from "react";
 import freshlogo from "../../assets/images/freshcart-logo.svg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { authContext } from "../../Context/AuthContext";
+import { CartContext } from "../../Context/CartContext";
 
 function Navbar() {
+  const { numberOfCartItems } = useContext(CartContext);
   const { token, setToken } = useContext(authContext);
   const navigate = useNavigate();
   function handleLogout() {
@@ -14,7 +16,7 @@ function Navbar() {
   }
   return (
     <nav className="navbar bg-white shadow-md mb-8">
-      <div className="container flex justify-between items-center px-4 py-3 mx-auto w-full max-w-7xl">
+      <div className="container flex justify-between items-center px-4 py-3 mx-auto w-full ">
         {/* Left Nav */}
         <div className="left-nav flex items-center gap-4">
           <Link to="/products" className="flex items-center">
@@ -50,9 +52,8 @@ function Navbar() {
             </ul>
           ) : null}
         </div>
-
         {/* Right Nav */}
-        <div className="right-nav flex items-center gap-4">
+        <div className="right-nav flex items-center gap-4 ml-auto ">
           {/* Cart Icon */}
           {token && (
             <NavLink
@@ -75,11 +76,10 @@ function Navbar() {
                   d="M5 6h2l1.68 9.39a2 2 0 0 0 2 1.61h6.72a2 2 0 0 0 2-1.61L21 8H7"
                 />
               </svg>
-              {/* -------------------------------------------- */}
               {/* Example badge for cart items, replace 0 with cart count if available */}
-              {/* <span className="absolute -top-1 -right-2 bg-green-600 text-white text-xs rounded-full px-1.5 py-0.5">
-                2
-              </span> */}
+              <span className="absolute -top-1 -right-2 bg-green-600 text-white text-xs rounded-full px-1.5 py-0.5">
+                {numberOfCartItems || 0}
+              </span>
             </NavLink>
           )}
 
@@ -105,7 +105,6 @@ function Navbar() {
             )}
           </ul>
         </div>
-
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center">
           {/* You can implement a hamburger menu here if needed */}
@@ -114,8 +113,8 @@ function Navbar() {
 
       {/* Mobile Nav Links */}
       {token && (
-        <div className="md:hidden bg-white px-4 pb-2">
-          <ul className="flex flex-col gap-2 font-medium">
+        <div className="md:hidden  px-4 pb-2">
+          <ul className="flex  flex-col gap-2 font-medium">
             <li>
               <NavLink
                 to="/products"

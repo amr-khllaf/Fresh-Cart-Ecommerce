@@ -17,6 +17,7 @@ import { QueryClient } from "./../node_modules/@tanstack/query-core/src/queryCli
 import { QueryClientProvider } from "@tanstack/react-query";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import CartContextProvider from "./Context/CartContext";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const router = createHashRouter([
@@ -98,6 +99,8 @@ function App() {
         <QueryClientProvider client={reactQueryClientConfig}>
           <CartContextProvider>
             <RouterProvider router={router} />
+
+            <Toaster />
           </CartContextProvider>
         </QueryClientProvider>
       </AuthContext>

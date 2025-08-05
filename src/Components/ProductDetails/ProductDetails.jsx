@@ -1,11 +1,44 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
 import LazyLoading from "../LazyLoading/LazyLoading";
 import useAOS from "../../CustomHooks/useAOS/useAOS";
+import { CartContext } from "../../Context/CartContext";
+import toast from "react-hot-toast";
 
 function ProductDetails() {
+  const { addProductToCart } = useContext(CartContext);
+  const navigate = useNavigate();
+  async function handleAddProduct(id) {
+    const responseFlag = await addProductToCart(id); // we will make it await to handel the async because the if condition will be applied after it so we need to handle it
+
+    if (responseFlag) {
+      // Message Success
+      toast.success("Product added to cart successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      // Navigate to cart page
+      console.log("Navigating to cart...");
+
+      toast.loading("Redirecting to cart...", {
+        id: "redirect-toast",
+        position: "top-center",
+        duration: 3000,
+      });
+      setTimeout(() => {
+        toast.dismiss("redirect-toast"); // Dismiss the loading toast
+        navigate("/cart");
+      }, 3000);
+    } else {
+      // Problem With Response
+      toast.error("Failed to add product to cart. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    }
+  }
   const { id } = useParams(); // Get the product ID from the URL parameters
   // State to manage the image cover
   const [imageCover, setImageCover] = useState(null);
@@ -73,8 +106,6 @@ function ProductDetails() {
                   alt={`Product thumbnail ${idx + 1}`}
                   onClick={() => setImageCover(img)}
                   loading="lazy"
-                  data-aos="fade-up"
-                  data-aos-delay={`${(idx + 1) * 100}`} // Delay each thumbnail for time (idx + 1) * 100ms = {(idx + 1) * 100}ms = 100ms, 200ms, 300ms, etc.
                   className="w-20 h-20 object-cover rounded-lg border border-gray-200 shadow-sm hover:scale-110 hover:border-emerald-400 transition-all duration-300 cursor-pointer"
                 />
               ))}
@@ -102,18 +133,10 @@ function ProductDetails() {
           </div>
 
           {/* Optional separator line */}
-          <div
-            className="border-t border-gray-200 my-4"
-            data-aos="fade-up"
-            data-aos-anchor-placement="center-bottom"
-          />
+          <div className="border-t border-gray-200 my-4" />
 
           {/* Bottom section: price + rating + add to cart button */}
-          <div
-            className="space-y-4 pt-2"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
+          <div className="space-y-4 pt-2">
             <div className="flex items-center justify-between">
               <span className="text-lg font-semibold text-gray-600/70">
                 EGP {product.price.toLocaleString()}
@@ -127,7 +150,10 @@ function ProductDetails() {
                 </span>
               </div>
             </div>
-            <button className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white py-2 px-6 rounded-xl font-semibold text-lg shadow-md hover:shadow-xl transition-all duration-300 active:scale-95 focus:outline-none focus:ring-4 focus:ring-emerald-200 cursor-pointer">
+            <button
+              className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white py-2 px-6 rounded-xl font-semibold text-lg shadow-md hover:shadow-xl transition-all duration-300 active:scale-95 focus:outline-none focus:ring-4 focus:ring-emerald-200 cursor-pointer"
+              onClick={() => handleAddProduct(product._id)}
+            >
               + Add to Cart
             </button>
           </div>
