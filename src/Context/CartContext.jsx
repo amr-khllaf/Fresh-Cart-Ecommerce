@@ -56,10 +56,6 @@ export default function CartContextProvider({ children }) {
         return null;
       });
   }
-  // Get user Cart when the user make a refresh
-  useEffect(() => {
-    getUserCart();
-  }, []);
 
   // Update The Cart Product Quantity
 
@@ -88,6 +84,31 @@ export default function CartContextProvider({ children }) {
         return error;
       });
   }
+  // Remove Specific Item From the Cart Function
+
+  async function removeFromCart(productId) {
+    return axios
+      .delete(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`, {
+        headers: {
+          token: localStorage.getItem("userToken") || "", // Use token from localStorage
+        },
+      })
+      .then((response) => {
+        // Handle successful response
+        setNumberOfCartItems(response.data.numOfCartItems); // Update the number of cart items
+        setAllProducts(response.data.data.products); // Update the allProducts state with the retrieved cart items
+        setTotalCartPrice(response.data.data.totalCartPrice); // Update the total cart price
+        return true; // Return true to indicate success
+      })
+      .catch((error) => {
+        console.error("Error removing product from cart:", error);
+        return false; // Return false to indicate failure
+      });
+  }
+  // Get user Cart when the user make a refresh
+  useEffect(() => {
+    getUserCart();
+  }, []);
 
   return (
     <CartContext.Provider
@@ -98,6 +119,7 @@ export default function CartContextProvider({ children }) {
         numberOfCartItems, // Number of items in the cart
         getUserCart, // Function to get user cart
         updateCount, // Function to update product quantity in the cart
+        removeFromCart, // Function to remove product from cart
       }}
     >
       {/* Provide any cart-related state or functions here */}

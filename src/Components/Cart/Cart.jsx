@@ -1,12 +1,26 @@
 import { useContext } from "react";
 import { CartContext } from "../../Context/CartContext";
 import LazyLoading from "../LazyLoading/LazyLoading";
+import toast from "react-hot-toast";
 
 function Cart() {
-  const { allProducts, totalCartPrice, updateCount } = useContext(CartContext);
+  const { allProducts, totalCartPrice, updateCount, removeFromCart } =
+    useContext(CartContext);
   function handleCountUpdate(productId, newCount) {
     updateCount(productId, newCount);
   }
+
+  async function handleRemoveFromTheCart(productId) {
+    const isRemovedFlag = await removeFromCart(productId);
+    if (isRemovedFlag) {
+      // Handle successful removal (e.g., show a success message)
+      toast.success("Product removed from cart successfully!");
+    } else {
+      // Handle failed removal (e.g., show an error message)
+      toast.error("Failed to remove product from cart.");
+    }
+  }
+
   return (
     <div className="py-8 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
       <div className="flex flex-col justify-start items-start space-y-2 mb-6 ">
@@ -127,7 +141,12 @@ function Cart() {
                           </svg>
                         </button>
                       </div>
-                      <button className="text-red-500 hover:text-red-700 transition-colors cursor-pointer">
+                      <button
+                        onClick={() => {
+                          handleRemoveFromTheCart(product.product._id);
+                        }}
+                        className="remove text-red-500 hover:text-red-700 transition-colors cursor-pointer"
+                      >
                         <svg
                           className="w-5 h-5"
                           fill="none"
