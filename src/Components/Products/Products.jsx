@@ -22,13 +22,13 @@ function Products() {
     if (responseFlag) {
       // Message Success
       toast.success("Product added to cart successfully!", {
-        position: "top-right",
+        position: "top-center",
         autoClose: 3000,
       });
     } else {
       // Problem With Response
       toast.error("Failed to add product to cart. Please try again.", {
-        position: "top-right",
+        position: "top-center",
         autoClose: 3000,
       });
     }

@@ -16,16 +16,16 @@ function ProductDetails() {
     if (responseFlag) {
       // Message Success
       toast.success("Product added to cart successfully!", {
-        position: "top-right",
+        position: "top-center",
         autoClose: 3000,
       });
       // Navigate to cart page
       // Show a loading toast while redirecting
-      toast.loading("Redirecting to cart...", {
-        id: "redirect-toast",
-        position: "top-center",
-        duration: 3000,
-      });
+      // toast.loading("Redirecting to cart...", {
+      //   id: "redirect-toast",
+      //   position: "top-center",
+      //   duration: 3000,
+      // });
       setTimeout(() => {
         toast.dismiss("redirect-toast"); // Dismiss the loading toast
         navigate("/cart");
@@ -33,7 +33,7 @@ function ProductDetails() {
     } else {
       // Problem With Response
       toast.error("Failed to add product to cart. Please try again.", {
-        position: "top-right",
+        position: "top-center",
         autoClose: 3000,
       });
     }
