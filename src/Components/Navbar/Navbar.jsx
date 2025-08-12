@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import freshlogo from "../../assets/images/freshcart-logo.svg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { authContext } from "../../Context/AuthContext";
-import { CartContext } from "../../Context/CartContext";
+import { AuthContext } from "../../Context/AuthContext";
+import { CartContext } from "./../../Context/CartContext";
 
 function Navbar() {
   const { numberOfCartItems } = useContext(CartContext);
-  const { token, setToken } = useContext(authContext);
+  const { token, setToken } = useContext(AuthContext);
   const navigate = useNavigate();
   function handleLogout() {
     // Clear the token from localStorage and context
@@ -15,7 +15,7 @@ function Navbar() {
     navigate("/login"); // Redirect to login page
   }
   return (
-    <nav className="navbar bg-white shadow-md mb-8 fixed top-0 left-0 right-0 z-50">
+    <nav className="navbar bg-white shadow-md mb-8 ">
       <div className="container flex justify-between items-center px-4 py-3 mx-auto w-full ">
         {/* Left Nav */}
         <div className="left-nav flex items-center gap-4">

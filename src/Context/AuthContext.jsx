@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 
-export const authContext = createContext();
+export const AuthContext = createContext();
 
-export default function AuthContext({ children }) {
+export default function AuthProvider({ children }) {
   // You can add state and functions here to manage authentication
   const [token, setToken] = useState(null);
 
@@ -17,10 +17,9 @@ export default function AuthContext({ children }) {
       setToken(storedUserToken);
     }
   }, []);
-
   return (
-    <authContext.Provider value={{ token: token, setToken: setToken }}>
+    <AuthContext.Provider value={{ token: token, setToken: setToken }}>
       {children}
-    </authContext.Provider>
+    </AuthContext.Provider>
   );
 }

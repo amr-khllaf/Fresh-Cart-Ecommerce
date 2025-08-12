@@ -4,10 +4,12 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
 import { ColorRing } from "react-loader-spinner";
-import { authContext } from "../../Context/AuthContext";
+import { AuthContext } from "../../Context/AuthContext";
 import LazyLoading from "../LazyLoading/LazyLoading";
+import { CartContext } from "../../Context/CartContext";
 
 function Login() {
+  const { getUserCart } = useContext(CartContext);
   const navigate = useNavigate(); // Assuming you have useNavigate imported from 'react-router-dom'
   const [loginFailMessage, setLoginFailMessage] = useState(null);
   const [loginSuccessMessage, setLoginSuccessMessage] = useState(false);
@@ -18,7 +20,7 @@ function Login() {
     password: "",
   };
   // Using AuthContext to manage authentication state
-  const { setToken } = useContext(authContext);
+  const { setToken } = useContext(AuthContext);
 
   function loginUser(values) {
     setSubmitButtonFormIsClicked(true); // Set the button state to clicked
@@ -31,6 +33,8 @@ function Login() {
         // Store the token in localStorage or sessionStorage
         localStorage.setItem("userToken", x.data.token); // Store token in localStorage
         setToken(x.data.token); // Update the context with the new token instead of local state
+
+        getUserCart(); // Fetch the user's cart after login
 
         setLoginSuccessMessage(true);
         setSubmitButtonFormIsClicked(false); // Reset the button state
