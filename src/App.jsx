@@ -18,6 +18,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import CartContextProvider from "./Context/CartContext";
 import { Toaster } from "react-hot-toast";
+import { Offline } from "react-detect-offline";
 
 function App() {
   const router = createHashRouter([
@@ -92,6 +93,23 @@ function App() {
   ]);
   const reactQueryClientConfig = new QueryClient();
 
+  const [isOnlineAgain, setIsOnlineAgain] = useState(false);
+
+  useEffect(() => {
+    const handleOnlineStatus = () => {
+      setIsOnlineAgain(true);
+      setTimeout(() => {
+        setIsOnlineAgain(false);
+      }, 3000);
+    };
+
+    window.addEventListener("online", handleOnlineStatus);
+
+    return () => {
+      window.removeEventListener("online", handleOnlineStatus);
+    };
+  }, []);
+
   return (
     <>
       {/* Provide the AuthContext to the entire app */}
@@ -99,8 +117,23 @@ function App() {
         <QueryClientProvider client={reactQueryClientConfig}>
           <CartContextProvider>
             <RouterProvider router={router} />
-
-            <Toaster />
+            <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
+            <Offline>
+              <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white dark:bg-gray-800 px-6 py-3 rounded-full shadow-lg border border-red-200 flex items-center justify-center z-50 animate-fadeIn">
+                <span className="h-3 w-3 bg-red-500 rounded-full mr-2 animate-pulse"></span>
+                <span className="text-gray-800 dark:text-white font-medium text-sm">
+                  Connection lost. Some features may be unavailable.
+                </span>
+              </div>
+            </Offline>
+            {isOnlineAgain && (
+              <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white dark:bg-gray-800 px-6 py-3 rounded-full shadow-lg border border-green-200 flex items-center justify-center z-50 animate-fadeIn">
+                <span className="h-3 w-3 bg-green-500 rounded-full mr-2"></span>
+                <span className="text-gray-800 dark:text-white font-medium text-sm">
+                  You're back online!
+                </span>
+              </div>
+            )}
           </CartContextProvider>
         </QueryClientProvider>
       </AuthContext>
